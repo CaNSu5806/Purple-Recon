@@ -1,0 +1,78 @@
+{
+    "target": "127.0.0.1",
+    "status": "up",
+    "ports": [
+        {
+            "port": 135,
+            "protocol": "tcp",
+            "state": "open",
+            "service": "msrpc",
+            "product": "Microsoft Windows RPC",
+            "version": null
+        },
+        {
+            "port": 445,
+            "protocol": "tcp",
+            "state": "open",
+            "service": "microsoft-ds",
+            "product": null,
+            "version": null
+        },
+        {
+            "port": 1042,
+            "protocol": "tcp",
+            "state": "open",
+            "service": "afrog",
+            "product": null,
+            "version": null
+        },
+        {
+            "port": 1043,
+            "protocol": "tcp",
+            "state": "open",
+            "service": "boinc",
+            "product": null,
+            "version": null
+        },
+        {
+            "port": 1521,
+            "protocol": "tcp",
+            "state": "open",
+            "service": "oracle-tns",
+            "product": "Oracle TNS listener",
+            "version": "21.0.0.0.0"
+        },
+        {
+            "port": 2869,
+            "protocol": "tcp",
+            "state": "open",
+            "service": "http",
+            "product": "Microsoft HTTPAPI httpd",
+            "version": "2.0"
+        },
+        {
+            "port": 3306,
+            "protocol": "tcp",
+            "state": "open",
+            "service": "mysql",
+            "product": "MySQL",
+            "version": "8.0.43"
+        },
+        {
+            "port": 5500,
+            "protocol": "tcp",
+            "state": "open",
+            "service": "http",
+            "product": "Oracle XML DB Enterprise Edition httpd",
+            "version": null
+        },
+        {
+            "port": 7778,
+            "protocol": "tcp",
+            "state": "open",
+            "service": "interwise",
+            "product": null,
+            "version": null
+        }
+    ]
+}
