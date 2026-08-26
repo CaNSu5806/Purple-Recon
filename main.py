@@ -5,23 +5,28 @@ from purple_recon.recon.nmap import run_nmap
 from purple_recon.parsers.nmap_parser import parse_nmap_xml
 from purple_recon.generators.event_generator import generate_security_events
 from purple_recon.analysis.risk_analyzer import analyze_risk
-from purple_recon.utils.output_manager import save_json
+from purple_recon.reporting.html_report import build_html_report
+from purple_recon.utils.output_manager import save_json, save_html
 from purple_recon.analysis.attack_mapper import map_attack_context
 from purple_recon.reporting.report_builder import build_report
+from purple_recon.utils.config_loader import load_config
 
 
 def run_scan(target):
     """
     Run the complete PurpleRecon scanning workflow.
-
-    This function handles scanning, parsing, event generation,
-    risk analysis, ATT&CK mapping, reporting, and output.
     """
 
     print("[*] PurpleRecon")
 
-    # Run Nmap and collect its XML output.
-    xml_output = run_nmap(target)
+    # Load PurpleRecon settings from config.yaml.
+    config = load_config()
+
+    # Run Nmap using scanner settings from the configuration file.
+    xml_output = run_nmap(
+        target,
+        config["scanner"]
+    )
 
     if not xml_output:
         return
@@ -45,6 +50,8 @@ def run_scan(target):
         risk_findings,
         attack_mappings
     )
+    # Convert the unified report into a human-readable HTML report.
+    html_report = build_html_report(report)
 
     print("[+] Scan completed successfully.\n")
 
@@ -87,13 +94,17 @@ def run_scan(target):
         target_value,
         "report"
     )
+    html_filepath = save_html(
+    html_report,
+    target_value
+    )
 
     print(f"\n[+] Scan results saved to {scan_filepath}")
     print(f"[+] Security events saved to {events_filepath}")
     print(f"[+] Risk findings saved to {risk_filepath}")
     print(f"[+] ATT&CK context saved to {attack_filepath}")
     print(f"[+] Unified report saved to {report_filepath}")
-
+    print(f"[+] HTML report saved to {html_filepath}")
 
 def main():
     """

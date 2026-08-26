@@ -31,3 +31,34 @@ def save_json(data, target, output_type):
         json.dump(data, file, indent=4)
 
     return filepath
+
+def save_html(html_content, target):
+    """
+    Save a generated HTML report inside the output directory.
+
+    Args:
+        html_content (str): Generated HTML content.
+        target (str): Target IP address or hostname.
+
+    Returns:
+        str: Path of the saved HTML report.
+    """
+
+    # Make sure the output directory exists.
+    os.makedirs("output", exist_ok=True)
+
+    # Create a timestamp so previous reports are not overwritten.
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    # Use a fallback value if the target is missing.
+    target = target or "unknown"
+
+    # Build the HTML report filename.
+    filename = f"report_{target}_{timestamp}.html"
+    filepath = os.path.join("output", filename)
+
+    # Save the HTML content using UTF-8 encoding.
+    with open(filepath, "w", encoding="utf-8") as file:
+        file.write(html_content)
+
+    return filepath

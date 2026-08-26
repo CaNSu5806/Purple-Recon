@@ -1,0 +1,9 @@
+scanner:
+  ports: "1-1000"
+  version_detection: true
+  timeout: 120
+
+output:
+  directory: "output"
+  save_json: true
+  save_html: true

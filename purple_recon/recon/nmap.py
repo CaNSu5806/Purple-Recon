@@ -1,46 +1,69 @@
 import subprocess
 
 
-def run_nmap(target):
+def run_nmap(target, scanner_config):
     """
-    Runs an Nmap service/version scan against the given target.
+    Run an Nmap scan using settings loaded from config.yaml.
 
-    Nmap output is returned as XML so that it can be parsed reliably
-    by the parser module instead of processing human-readable output.
+    Args:
+        target (str): Target IP address or hostname.
+        scanner_config (dict): Scanner-related configuration values.
+
+    Returns:
+        str | None: Nmap XML output if successful.
     """
 
     print(f"[*] Target: {target}")
     print("[*] Starting Nmap scan...\n")
 
-    # -sV: Detect services and their versions.
-    # -oX -: Produce XML output and write it to stdout instead of a file.
+    # Start building the Nmap command.
     command = [
-        "nmap",
-        "-sV",
+        "nmap"
+    ]
+
+    # Read configured port range.
+    ports = scanner_config.get("ports")
+
+    if ports:
+        command.extend([
+            "-p",
+            str(ports)
+        ])
+
+    # Enable service/version detection only when configured.
+    if scanner_config.get("version_detection", True):
+        command.append("-sV")
+
+    # Return XML directly to Python through stdout.
+    command.extend([
         "-oX",
         "-",
         target
-    ]
+    ])
+
+    # Read the subprocess timeout from configuration.
+    timeout = scanner_config.get("timeout", 120)
 
     try:
-        # capture_output allows PurpleRecon to process Nmap's output
-        # instead of letting Nmap print directly to the terminal.
         result = subprocess.run(
             command,
             capture_output=True,
             text=True,
-            check=True
+            check=True,
+            timeout=timeout
         )
 
         return result.stdout
 
     except FileNotFoundError:
-        # Raised when Nmap is not installed or cannot be found in PATH.
         print("[!] Nmap could not be found.")
         return None
 
+    except subprocess.TimeoutExpired:
+        print(f"[!] Nmap scan timed out after {timeout} seconds.")
+        return None
+
     except subprocess.CalledProcessError as error:
-        # Raised when Nmap executes but returns a non-zero exit code.
         print("[!] Nmap scan failed.")
         print(error.stderr)
         return None
