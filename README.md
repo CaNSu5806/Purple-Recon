@@ -4,7 +4,7 @@
 <!-- HEADER -->
 <!-- ===================================================== -->
 
-![PurpleRecon Header](https://capsule-render.vercel.app/api?type=waving&height=220&color=0:8A2BE2,50:FF0055,100:00BFFF&text=PurpleRecon&fontColor=ffffff&fontSize=42&animation=twinkling&desc=Reconnaissance%20%7C%20Traffic%20Analysis%20%7C%20Detection%20Correlation&descAlignY=62)
+![PurpleRecon Header](https://capsule-render.vercel.app/api?type=waving&height=220&color=0:8A2BE2,50:FF0055,100:00BFFF&text=PurpleRecon&fontColor=ffffff&fontSize=42&animation=twinkling&desc=Reconnaissance%20%7C%20Traffic%20Analysis%20%7C%20Detection%20Correlation&descAlignY=72)
 
 <p align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=19&pause=1200&color=8A2BE2&center=true&vCenter=true&width=900&lines=Reconnaissance+from+an+attacker's+perspective...;Analyzing+the+network+footprint+left+behind...;Connecting+offensive+activity+with+defensive+visibility...;One+workflow.+Two+perspectives.+PurpleRecon." />
