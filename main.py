@@ -10,7 +10,9 @@ from purple_recon.utils.output_manager import save_json, save_html
 from purple_recon.analysis.attack_mapper import map_attack_context
 from purple_recon.reporting.report_builder import build_report
 from purple_recon.utils.config_loader import load_config
-
+from purple_recon.recon.tshark import analyze_pcap
+from purple_recon.parsers.pcap_parser import parse_tshark_output
+from purple_recon.analysis.scan_detector import detect_scan_patterns
 
 def run_scan(target):
     """
@@ -105,41 +107,87 @@ def run_scan(target):
     print(f"[+] ATT&CK context saved to {attack_filepath}")
     print(f"[+] Unified report saved to {report_filepath}")
     print(f"[+] HTML report saved to {html_filepath}")
+    
+def run_pcap_analysis(pcap_path):
+    """
+    Run the PurpleRecon defensive PCAP analysis workflow.
+
+    This workflow reads a capture file with TShark, converts
+    the raw output into structured packet data, and searches
+    for basic reconnaissance patterns.
+    """
+
+    print("[*] PurpleRecon - PCAP Analysis")
+    print(f"[*] Capture: {pcap_path}")
+
+    # Extract selected network fields from the capture using TShark.
+    raw_output = analyze_pcap(pcap_path)
+
+    if not raw_output:
+        print("[!] No packet data could be extracted.")
+        return
+
+    # Convert raw TShark output into normalized packet dictionaries.
+    packets = parse_tshark_output(raw_output)
+
+    print(f"[+] Parsed {len(packets)} packets.")
+
+    # Analyze TCP activity for possible reconnaissance patterns.
+    findings = detect_scan_patterns(packets)
+
+    print("\n[+] Scan detection findings:")
+    print(json.dumps(findings, indent=4))
+
 
 def main():
     """
-    Configure and handle the PurpleRecon command-line interface.
+    PurpleRecon command-line interface.
     """
 
     parser = argparse.ArgumentParser(
-        description="PurpleRecon - Automated Purple-Team Recon Tool"
+        description="PurpleRecon - Purple-Team Reconnaissance and Detection Tool"
     )
 
-    # Create subcommands such as scan, analyze, report, etc.
     subparsers = parser.add_subparsers(
         dest="command",
-        help="Available commands"
+        required=True
     )
 
-    # Create the "scan" command.
+    # -------------------------
+    # Active Reconnaissance
+    # -------------------------
+
     scan_parser = subparsers.add_parser(
         "scan",
-        help="Run reconnaissance against a target"
+        help="Run an Nmap reconnaissance scan"
     )
 
-    # The scan command requires a target.
     scan_parser.add_argument(
         "target",
         help="Target IP address or hostname"
     )
 
+    # -------------------------
+    # Defensive PCAP analysis
+    # -------------------------
+
+    pcap_parser = subparsers.add_parser(
+        "analyze-pcap",
+        help="Analyze a PCAP/PCAPNG capture file"
+    )
+
+    pcap_parser.add_argument(
+        "pcap",
+        help="Path to the PCAP or PCAPNG file"
+    )
+
     args = parser.parse_args()
 
-    # Run the correct workflow based on the selected command.
     if args.command == "scan":
         run_scan(args.target)
-    else:
-        parser.print_help()
+
+    elif args.command == "analyze-pcap":
+        run_pcap_analysis(args.pcap)
 
 
 if __name__ == "__main__":

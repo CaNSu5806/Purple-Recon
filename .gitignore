@@ -219,3 +219,7 @@ __marimo__/
 
 # PurpleRecon generated output
 output/
+
+# Local capture files
+*.pcap
+*.pcapng
