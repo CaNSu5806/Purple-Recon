@@ -32,13 +32,14 @@ def save_json(data, target, output_type):
 
     return filepath
 
-def save_html(html_content, target):
+def save_html(html_content, target, output_type="report"):
     """
     Save a generated HTML report inside the output directory.
 
     Args:
         html_content (str): Generated HTML content.
         target (str): Target IP address or hostname.
+        output_type (str): Prefix used for the generated filename.
 
     Returns:
         str: Path of the saved HTML report.
@@ -53,8 +54,11 @@ def save_html(html_content, target):
     # Use a fallback value if the target is missing.
     target = target or "unknown"
 
-    # Build the HTML report filename.
-    filename = f"report_{target}_{timestamp}.html"
+    # Example:
+    # report_127.0.0.1_20260827_220500.html
+    # purple_report_127.0.0.1_20260827_220500.html
+    filename = f"{output_type}_{target}_{timestamp}.html"
+
     filepath = os.path.join("output", filename)
 
     # Save the HTML content using UTF-8 encoding.
