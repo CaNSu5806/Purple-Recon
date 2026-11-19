@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PurpleRecon | Security Platform</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="brand">
+                <span class="brand-icon">P</span>
+                <div>
+                    <h2>PurpleRecon</h2>
+                    <small>SECURITY PLATFORM</small>
+                </div>
+            </div>
+
+            <div class="menu-label">MAIN MENU</div>
+
+            <nav>
+                <a href="#" class="active">Overview</a>
+                <a href="#">Reconnaissance</a>
+                <a href="#">PCAP Analysis</a>
+                <a href="#">Security Events</a>
+                <a href="#">Correlation</a>
+                <a href="#">MITRE ATT&CK</a>
+                <a href="#">Reports</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <span class="status-dot"></span>
+                System Ready
+                <small>Version 2.0.0</small>
+            </div>
+
+        </aside>
+
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <p class="breadcrumb">PurpleRecon / Overview</p>
+                    <h1>Security Overview</h1>
+                </div>
+
+                <div class="user-info">
+                    <span class="status-dot"></span>
+                    Platform Online
+                </div>
+            </header>
+
+
+            <section class="welcome">
+                <div>
+                    <p class="eyebrow">PURPLE TEAM SECURITY OPERATIONS</p>
+                    <h2>Welcome to PurpleRecon</h2>
+                    <p>
+                        Unified reconnaissance, defensive analysis
+                        and security intelligence.
+                    </p>
+                </div>
+
+                <div class="version-badge">
+                    V2 DEVELOPMENT
+                </div>
+            </section>
+
+
+            <section class="stats-grid">
+
+                <div class="stat-card">
+                    <span>Total Scans</span>
+                    <h2>0</h2>
+                    <small>Reconnaissance operations</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>Security Events</span>
+                    <h2>0</h2>
+                    <small>Detected events</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>PCAP Analyses</span>
+                    <h2>0</h2>
+                    <small>Analyzed capture files</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>Correlations</span>
+                    <h2>0</h2>
+                    <small>Recon and defensive matches</small>
+                </div>
+
+            </section>
+
+
+            <section class="content-grid">
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>Platform Modules</h3>
+                        <span>7 MODULES</span>
+                    </div>
+
+                    <div class="module-list">
+                        <div>01 <span>Reconnaissance</span> <b>Planned</b></div>
+                        <div>02 <span>PCAP Analysis</span> <b>Planned</b></div>
+                        <div>03 <span>Security Events</span> <b>Planned</b></div>
+                        <div>04 <span>Risk Analysis</span> <b>Planned</b></div>
+                        <div>05 <span>Correlation</span> <b>Planned</b></div>
+                        <div>06 <span>MITRE ATT&CK</span> <b>Planned</b></div>
+                        <div>07 <span>Reporting</span> <b>Planned</b></div>
+                    </div>
+                </div>
+
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>System Information</h3>
+                    </div>
+
+                    <div class="system-info">
+                        <p>Platform <strong>PurpleRecon</strong></p>
+                        <p>Architecture <strong>Purple Team</strong></p>
+                        <p>Backend <strong>Python / Flask</strong></p>
+                        <p>Database <strong>Not Connected</strong></p>
+                        <p>Environment <strong>Development</strong></p>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <footer>
+                PurpleRecon v2.0 · Purple Team Security Platform
+            </footer>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

@@ -1,14 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def dashboard():
-    return """
-    <h1>PurpleRecon v2</h1>
-    <p>Web platformu başarıyla başlatıldı.</p>
-    <p>Status: Development</p>
-    """
+    return render_template("dashboard.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
